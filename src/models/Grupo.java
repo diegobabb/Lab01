@@ -15,11 +15,11 @@ public class Grupo {
     int numero;
     Ciclo ciclo;
 
-    public Grupo(Profesor profesor, Curso curso, int numero, Ciclo ciclo) {
+    public Grupo(Profesor profesor, Curso curso, int numero) {
         this.profesor = profesor;
         this.curso = curso;
         this.numero = numero;
-        this.ciclo = ciclo;
+        this.ciclo = new Ciclo();
     }
 
     public Grupo(Profesor profesor, Curso curso) {

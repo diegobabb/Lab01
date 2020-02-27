@@ -21,14 +21,14 @@ public class Curso {
     Carrera carrera;
     List<Grupo> grupos;
 
-    public Curso(int id, String codigo, String nombre, int credito, int horas, Carrera carrera) {
+    public Curso(int id, String codigo, String nombre, int credito, int horas) {
         this.id = id;
         this.codigo = codigo;
         this.nombre = nombre;
         this.credito = credito;
         this.horas = horas;
-        this.carrera = carrera;
-        this.carrera = carrera;
+        this.carrera = new Carrera();
+        this.grupos = new ArrayList<>();
     }
     
 
@@ -37,6 +37,8 @@ public class Curso {
         this.nombre = nombre;
         this.credito = credito;
         this.horas = horas;
+        this.carrera = new Carrera();
+        this.grupos = new ArrayList<>();
     }
 
     public Curso(){
@@ -45,6 +47,7 @@ public class Curso {
         this.credito = 0;
         this.horas = 0;
         this.grupos = new ArrayList<>();
+        this.carrera = new Carrera();
     }
 
     public String getCodigo() {

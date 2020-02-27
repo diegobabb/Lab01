@@ -103,56 +103,6 @@ public class ServiceCurso extends Service {
         }
     }
      
-     public Carrera buscarCarrera(int id) throws GlobalException, NoDataException{
-
-        try {
-            connection();
-        } catch (ClassNotFoundException e) {
-            throw new GlobalException("No se ha localizado el driver");
-        } catch (SQLException e) {
-            throw new NoDataException("La base de datos no se encuentra disponible");
-        }
-        ResultSet rs = null;
-        Carrera carrera = null;
-        CallableStatement pstmt = null;
-        try {
-            pstmt = connection.prepareCall(FIND);
-            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
-            pstmt.setInt(2, id);
-            pstmt.execute();
-            rs = (ResultSet) pstmt.getObject(1);
-            if (rs.next()) {
-                carrera = new Carrera(
-                        rs.getInt("ID"),
-                        rs.getString("CODIGO"),
-                        rs.getString("NOMBRE")
-                        );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-            throw new GlobalException("Sentencia no valida");
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-                disconnect();
-            } catch (SQLException e) {
-                throw new GlobalException("Estatutos invalidos o nulos");
-            }
-        }
-        if (carrera == null) {
-            throw new NoDataException("No hay datos");
-        }
-        else{
-            return carrera;
-        }
-     }
-     
      public Curso find(String codigo) throws GlobalException, NoDataException {
 
         try {
@@ -178,8 +128,7 @@ public class ServiceCurso extends Service {
                         rs.getString("CODIGO"),
                         rs.getString("NOMBRE"),
                         rs.getInt("CREDITOS"),
-                        rs.getInt("HORAS_SEMANALES"),
-                        buscarCarrera(rs.getInt("CARRERA"))
+                        rs.getInt("HORAS_SEMANALES")
                         );
             }
         } catch (SQLException e) {
@@ -199,6 +148,7 @@ public class ServiceCurso extends Service {
                 throw new GlobalException("Estatutos invalidos o nulos");
             }
         }
+        
         if (curso == null ) {
             throw new NoDataException("No hay datos");
         }
@@ -231,8 +181,7 @@ public class ServiceCurso extends Service {
                         rs.getString("CODIGO"),
                         rs.getString("NOMBRE"),
                         rs.getInt("CREDITOS"),
-                        rs.getInt("HORAS_SEMANALES"),
-                        buscarCarrera(rs.getInt("CARRERA"))
+                        rs.getInt("HORAS_SEMANALES")
                         );
                 coleccion.add(curso);
             }

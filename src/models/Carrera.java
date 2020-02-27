@@ -15,53 +15,27 @@ public class Carrera {
     private String codigo;
     private String nombre;
     
-    public Carrera(int id, String codigo, String nombre) {
-        this.id = id;
-        this.codigo = codigo;
-        this.nombre = nombre;
-    }
-
-    public Carrera(String codigo, String nombre) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-    }
-    
-    
     public Carrera() {
-        this.id = 0;
-        this.codigo = new String();
-        this.nombre = new String();
+        this.id = 1;
+        this.codigo = "EIF";
+        this.nombre = "Ingenieria en Sistemas";
     }
     
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getCodigo() {
         return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    } 
-
     @Override
     public String toString() {
         return "Carrera{" + "id=" + id + ", codigo=" + codigo + ", nombre=" + nombre + '}';
     }
-    
-    
     
 }
