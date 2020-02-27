@@ -9,6 +9,6 @@ package services;
  *
  * @author diego
  */
-public class ServiceCurso {
+public class ServiceCurso extends Service {
     
 }
