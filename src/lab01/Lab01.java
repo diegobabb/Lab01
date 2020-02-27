@@ -14,6 +14,7 @@ public class Lab01 {
     public static void main(String[] args) {
         // TODO code application logic here
         // Hola soy josue
+        System.out.print("HOLA");
     }
 
 }
