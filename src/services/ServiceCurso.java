@@ -67,6 +67,7 @@ public class ServiceCurso extends Service {
                 throw new GlobalException("Estatutos invalidos o nulos");
             }
         }
+    
     }
      
      public void update(Curso curso) throws GlobalException, NoDataException {
@@ -122,9 +123,8 @@ public class ServiceCurso extends Service {
             pstmt.setString(2, codigo);
             pstmt.execute();
             rs = (ResultSet) pstmt.getObject(1);
-            if (rs.next()) {
+            while (rs.next()) {
                 curso = new Curso(
-                        rs.getInt("ID"),
                         rs.getString("CODIGO"),
                         rs.getString("NOMBRE"),
                         rs.getInt("CREDITOS"),
@@ -133,7 +133,6 @@ public class ServiceCurso extends Service {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-
             throw new GlobalException("Sentencia no valida");
         } finally {
             try {
@@ -177,7 +176,6 @@ public class ServiceCurso extends Service {
             rs = (ResultSet) pstmt.getObject(1);
             while (rs.next()) {
                  curso = new Curso(
-                        rs.getInt("ID"),
                         rs.getString("CODIGO"),
                         rs.getString("NOMBRE"),
                         rs.getInt("CREDITOS"),

@@ -119,8 +119,8 @@ public class ServiceGrupo extends Service{
             rs = (ResultSet) pstmt.getObject(1);
             if (rs.next()) {
                 grupo = new Grupo(
-                        s_profe.find(rs.getString(profesor.getCedula())),
-                        s_curso.find(rs.getString(curso.getCodigo())),
+                        s_profe.find(rs.getString("PROFESOR")),
+                        s_curso.find(rs.getString("CURSO")),
                         rs.getInt("NUMERO"));
             }
         } catch (SQLException e) {
