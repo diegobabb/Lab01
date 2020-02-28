@@ -137,7 +137,7 @@ public class ServiceProfesor extends Service{
             pstmt.execute();
             rs = (ResultSet) pstmt.getObject(1);
             while (rs.next()) {
-                profesor = new Profesor(rs.getString("CEDULA_PROFESOR"),
+                profesor = new Profesor(rs.getString("CEDULA"),
                         rs.getString("NOMBRE"),
                         rs.getString("TELEFONO"),
                         rs.getString("EMAIL"));
@@ -191,7 +191,7 @@ public class ServiceProfesor extends Service{
             pstmt.execute();
             rs = (ResultSet) pstmt.getObject(1);
             while (rs.next()) {
-                elProfesor = new Profesor(rs.getString("CEDULA_PROFESOR"),
+                elProfesor = new Profesor(rs.getString("CEDULA"),
                         rs.getString("NOMBRE"),
                         rs.getString("TELEFONO"),
                         rs.getString("EMAIL"));
