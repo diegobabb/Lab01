@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import models.Carrera;
 import models.Curso;
 import oracle.jdbc.internal.OracleTypes;
 import static services.Service.connection;
@@ -132,7 +131,6 @@ public class ServiceCurso extends Service {
                         );
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new GlobalException("Sentencia no valida");
         } finally {
             try {
@@ -200,7 +198,7 @@ public class ServiceCurso extends Service {
                 throw new GlobalException("Estatutos invalidos o nulos");
             }
         }
-        if (coleccion == null || coleccion.size() == 0) {
+        if (coleccion == null || coleccion.isEmpty()) {
             throw new NoDataException("No hay datos");
         }
         return coleccion;

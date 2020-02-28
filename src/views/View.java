@@ -6,6 +6,7 @@
 package views;
 
 import controllers.Controller;
+import java.awt.Color;
 import java.util.Observable;
 import java.util.Observer;
 import models.Model;
@@ -20,6 +21,7 @@ public class View extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form View
+     *
      * @param model
      */
     public View(Model model) {
@@ -45,23 +47,278 @@ public class View extends javax.swing.JFrame implements Observer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jInternalFrame1 = new javax.swing.JInternalFrame();
+        Principal = new javax.swing.JPanel();
+        encabezado = new javax.swing.JPanel();
+        titulo = new javax.swing.JLabel();
+        cerrar = new javax.swing.JLabel();
+        cursosTab = new javax.swing.JLabel();
+        profesoresTab = new javax.swing.JLabel();
+        contenedorTable = new javax.swing.JPanel();
+        contenedorProfesores = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableProfesores = new javax.swing.JTable();
+        contenedorCursos = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableCursor = new javax.swing.JTable();
+
+        jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setUndecorated(true);
+
+        Principal.setBackground(new java.awt.Color(255, 255, 255));
+
+        encabezado.setBackground(new java.awt.Color(3, 181, 170));
+
+        titulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        titulo.setForeground(new java.awt.Color(255, 255, 255));
+        titulo.setText("Sistema de mantenimiento");
+
+        cerrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cerrar.setForeground(new java.awt.Color(255, 255, 255));
+        cerrar.setText("X");
+        cerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cerrarMouseClicked(evt);
+            }
+        });
+
+        cursosTab.setBackground(new java.awt.Color(3, 181, 170));
+        cursosTab.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cursosTab.setForeground(new java.awt.Color(255, 255, 255));
+        cursosTab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cursosTab.setText("Cursos");
+        cursosTab.setOpaque(true);
+        cursosTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cursosTabMouseClicked(evt);
+            }
+        });
+
+        profesoresTab.setBackground(new java.awt.Color(2, 116, 109));
+        profesoresTab.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        profesoresTab.setForeground(new java.awt.Color(255, 255, 255));
+        profesoresTab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        profesoresTab.setText("Profesores");
+        profesoresTab.setOpaque(true);
+        profesoresTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                profesoresTabMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout encabezadoLayout = new javax.swing.GroupLayout(encabezado);
+        encabezado.setLayout(encabezadoLayout);
+        encabezadoLayout.setHorizontalGroup(
+            encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(encabezadoLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(titulo)
+                    .addGroup(encabezadoLayout.createSequentialGroup()
+                        .addComponent(cursosTab, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(profesoresTab, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(105, 105, 105)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        encabezadoLayout.setVerticalGroup(
+            encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(encabezadoLayout.createSequentialGroup()
+                .addComponent(cerrar)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(encabezadoLayout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(profesoresTab, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cursosTab, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        contenedorTable.setBackground(new java.awt.Color(255, 255, 255));
+        contenedorTable.setLayout(new java.awt.CardLayout());
+
+        contenedorProfesores.setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBorder(null);
+
+        tableProfesores.setBackground(new java.awt.Color(255, 255, 255));
+        tableProfesores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tableProfesores.setForeground(new java.awt.Color(12, 27, 51));
+        tableProfesores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"111", "Diego ", "111", "diego@gmail.com"},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Cedula", "Nombre", "Telefono", "Email"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tableProfesores.setGridColor(new java.awt.Color(200, 224, 240));
+        tableProfesores.setRowHeight(30);
+        tableProfesores.setSelectionBackground(new java.awt.Color(12, 27, 51));
+        tableProfesores.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableProfesores.setShowGrid(false);
+        tableProfesores.setShowHorizontalLines(true);
+        jScrollPane1.setViewportView(tableProfesores);
+
+        javax.swing.GroupLayout contenedorProfesoresLayout = new javax.swing.GroupLayout(contenedorProfesores);
+        contenedorProfesores.setLayout(contenedorProfesoresLayout);
+        contenedorProfesoresLayout.setHorizontalGroup(
+            contenedorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
+        );
+        contenedorProfesoresLayout.setVerticalGroup(
+            contenedorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+        );
+
+        contenedorTable.add(contenedorProfesores, "card2");
+
+        contenedorCursos.setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setBorder(null);
+
+        tableCursor.setBackground(new java.awt.Color(255, 255, 255));
+        tableCursor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tableCursor.setForeground(new java.awt.Color(12, 27, 51));
+        tableCursor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"111", "Funda ", "3", "5", "Informatica"},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Nombre", "Ceditos", "Horas semanales", "Carrera"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tableCursor.setGridColor(new java.awt.Color(200, 224, 240));
+        tableCursor.setRowHeight(30);
+        tableCursor.setSelectionBackground(new java.awt.Color(12, 27, 51));
+        tableCursor.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableCursor.setShowGrid(false);
+        tableCursor.setShowHorizontalLines(true);
+        jScrollPane2.setViewportView(tableCursor);
+
+        javax.swing.GroupLayout contenedorCursosLayout = new javax.swing.GroupLayout(contenedorCursos);
+        contenedorCursos.setLayout(contenedorCursosLayout);
+        contenedorCursosLayout.setHorizontalGroup(
+            contenedorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
+        );
+        contenedorCursosLayout.setVerticalGroup(
+            contenedorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+        );
+
+        contenedorTable.add(contenedorCursos, "card3");
+
+        javax.swing.GroupLayout PrincipalLayout = new javax.swing.GroupLayout(Principal);
+        Principal.setLayout(PrincipalLayout);
+        PrincipalLayout.setHorizontalGroup(
+            PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(encabezado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(contenedorTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        PrincipalLayout.setVerticalGroup(
+            PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PrincipalLayout.createSequentialGroup()
+                .addComponent(encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(contenedorTable, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_cerrarMouseClicked
+
+    private void cursosTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cursosTabMouseClicked
+        this.setLblColor(this.cursosTab);
+        this.resetLblColor(this.profesoresTab);
+        this.contenedorProfesores.setVisible(false);
+        this.contenedorCursos.setVisible(true);
+    }//GEN-LAST:event_cursosTabMouseClicked
+
+    private void profesoresTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profesoresTabMouseClicked
+        this.setLblColor(this.profesoresTab);
+        this.resetLblColor(this.cursosTab);
+        this.contenedorCursos.setVisible(false);
+        this.contenedorProfesores.setVisible(true);
+    }//GEN-LAST:event_profesoresTabMouseClicked
+
+    private void setLblColor(javax.swing.JLabel l) {
+        l.setBackground(new Color(2, 116, 109));
+    }
+
+    private void resetLblColor(javax.swing.JLabel l) {
+        l.setBackground(new Color(3, 181, 170));
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Principal;
+    private javax.swing.JLabel cerrar;
+    private javax.swing.JPanel contenedorCursos;
+    private javax.swing.JPanel contenedorProfesores;
+    private javax.swing.JPanel contenedorTable;
+    private javax.swing.JLabel cursosTab;
+    private javax.swing.JPanel encabezado;
+    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel profesoresTab;
+    private javax.swing.JTable tableCursor;
+    private javax.swing.JTable tableProfesores;
+    private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }
