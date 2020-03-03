@@ -78,6 +78,18 @@ public class Curso {
         return horas;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public Carrera getCarrera() {
+        return carrera;
+    }
+
+    public List<Grupo> getGrupos() {
+        return grupos;
+    }
+
     public void setHoras(int horas) {
         this.horas = horas;
     }
@@ -94,5 +106,6 @@ public class Curso {
     public String toString() {
         return "Curso{" + "id=" + id + ", codigo=" + codigo + ", nombre=" + nombre + ", credito=" + credito + ", horas=" + horas + ", carrera=" + carrera + ", grupos=" + grupos + '}';
     }
+
     
 }

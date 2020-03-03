@@ -154,7 +154,7 @@ public class ServiceCurso extends Service {
         return curso;
     }
      
-     public List<Curso> selectAll() throws GlobalException, NoDataException {
+     public ArrayList selectAll() throws GlobalException, NoDataException {
         try {
             connection();
         } catch (ClassNotFoundException ex) {
@@ -164,7 +164,7 @@ public class ServiceCurso extends Service {
         }
 
         ResultSet rs = null;
-        List<Curso> coleccion = new ArrayList();
+        ArrayList<Curso> coleccion = new ArrayList<>();
         Curso curso = null;
         CallableStatement pstmt = null;
         try {
@@ -183,7 +183,6 @@ public class ServiceCurso extends Service {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-
             throw new GlobalException("Sentencia no valida");
         } finally {
             try {
@@ -198,7 +197,7 @@ public class ServiceCurso extends Service {
                 throw new GlobalException("Estatutos invalidos o nulos");
             }
         }
-        if (coleccion == null || coleccion.isEmpty()) {
+        if (coleccion == null) {
             throw new NoDataException("No hay datos");
         }
         return coleccion;

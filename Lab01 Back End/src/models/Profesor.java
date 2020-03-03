@@ -1,12 +1,13 @@
 
 package models;
 
+import java.util.Objects;
+
 /**
  *
  * @author diego
  */
 public class Profesor {
-
     
     private int id;
     private String cedula;
@@ -40,6 +41,31 @@ public class Profesor {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 17 * hash + Objects.hashCode(this.cedula);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Profesor other = (Profesor) obj;
+        if (!Objects.equals(this.cedula, other.cedula)) {
+            return false;
+        }
+        return true;
     }
 
     public void setId(int id) {

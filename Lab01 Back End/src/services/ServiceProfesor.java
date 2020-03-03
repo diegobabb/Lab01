@@ -1,4 +1,3 @@
-
 package services;
 
 import exceptions.*;
@@ -16,7 +15,8 @@ import java.util.logging.Logger;
  *
  * @author diego
  */
-public class ServiceProfesor extends Service{
+public class ServiceProfesor extends Service {
+
     private static final String INSERT = "{call INSERTAR_PROFESOR(?,?,?,?)}";
     private static final String UPDATE = "{call MODIFICAR_PROFESOR(?,?,?,?)}";
     private static final String FIND = "{?=call BUSCAR_PROFESOR(?)}";
@@ -27,10 +27,10 @@ public class ServiceProfesor extends Service{
     }
 
     /**
-     * 
+     *
      * @param profesor, se inserta en la base de datos
      * @throws GlobalException
-     * @throws NoDataException 
+     * @throws NoDataException
      */
     public void insert(Profesor profesor) throws GlobalException, NoDataException {
         try {
@@ -69,10 +69,11 @@ public class ServiceProfesor extends Service{
     }
 
     /**
-     * 
-     * @param profesor, actualiza todos los datos del profesor en la base de datos
+     *
+     * @param profesor, actualiza todos los datos del profesor en la base de
+     * datos
      * @throws GlobalException
-     * @throws NoDataException 
+     * @throws NoDataException
      */
     public void update(Profesor profesor) throws GlobalException, NoDataException {
         try {
@@ -111,11 +112,12 @@ public class ServiceProfesor extends Service{
     }
 
     /**
-     * 
-     * @param cedula, cedula del profesor que se necesita encontrar los datos en la base de datos
+     *
+     * @param cedula, cedula del profesor que se necesita encontrar los datos en
+     * la base de datos
      * @return Profesor, con todos los datos del profesor con esa cedula
      * @throws GlobalException
-     * @throws NoDataException 
+     * @throws NoDataException
      */
     public Profesor find(String cedula) throws GlobalException, NoDataException {
 
@@ -167,10 +169,10 @@ public class ServiceProfesor extends Service{
     }
 
     /**
-     * 
-     * @return ArrayList con todos los profesores en la base de datos 
+     *
+     * @return ArrayList con todos los profesores en la base de datos
      * @throws GlobalException
-     * @throws NoDataException 
+     * @throws NoDataException
      */
     public ArrayList selectAll() throws GlobalException, NoDataException {
         try {
@@ -214,17 +216,17 @@ public class ServiceProfesor extends Service{
                 throw new GlobalException("Estatutos invalidos o nulos");
             }
         }
-        if (coleccion == null || coleccion.size() == 0) {
+        if (coleccion == null) {
             throw new NoDataException("No hay datos");
         }
         return coleccion;
     }
 
     /**
-     * 
+     *
      * @param cedula, del Profesor que se desea eliminar en la base de datos
      * @throws GlobalException
-     * @throws NoDataException 
+     * @throws NoDataException
      */
     public void delete(String cedula) throws GlobalException, NoDataException {
         try {
@@ -238,13 +240,9 @@ public class ServiceProfesor extends Service{
         try {
             pstmt = connection.prepareStatement(DELETE);
             pstmt.setString(1, cedula);
-
             int resultado = pstmt.executeUpdate();
-
             if (resultado == 0) {
                 throw new NoDataException("No se realizo el borrado");
-            } else {
-                System.out.println("\nEliminación Satisfactoria!");
             }
         } catch (SQLException e) {
             throw new GlobalException("Sentencia no valida");

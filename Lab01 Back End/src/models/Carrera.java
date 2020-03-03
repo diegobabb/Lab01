@@ -11,9 +11,9 @@ package models;
  */
 public class Carrera {
     
-    private int id;
-    private String codigo;
-    private String nombre;
+    private final int id;
+    private final String codigo;
+    private final String nombre;
     
     public Carrera() {
         this.id = 1;

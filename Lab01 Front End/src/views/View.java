@@ -9,7 +9,11 @@ import controllers.Controller;
 import java.awt.Color;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableModel;
+import models.Curso;
 import models.Model;
+import models.Profesor;
 
 /**
  *
@@ -26,16 +30,39 @@ public class View extends javax.swing.JFrame implements Observer {
      */
     public View(Model model) {
         this.model = model;
-        initComponents();
+        this.initComponents();
+        this.initHeader();
+        this.FormProfesor.setVisible(false);
+        setTitle("Lab01");
     }
 
-    public void addListeners(Controller controller) {
+    void initHeader() {
+        JTableHeader tableProfesoresHeader = this.tableProfesores.getTableHeader();
+        JTableHeader tableCursorHeader = this.tableCursor.getTableHeader();
+        tableProfesoresHeader.setBackground(new java.awt.Color(3, 181, 170));
+        tableProfesoresHeader.setFont(new java.awt.Font("Segoe UI", 0, 15));
+        tableProfesoresHeader.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        tableProfesoresHeader.setForeground(new java.awt.Color(255, 255, 255));
+        tableCursorHeader.setBackground(new java.awt.Color(3, 181, 170));
+        tableCursorHeader.setFont(new java.awt.Font("Segoe UI", 0, 15));
+        tableCursorHeader.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        tableCursorHeader.setForeground(new java.awt.Color(255, 255, 255));
+    }
 
+    public void addListeners(Controller aThis) {
+        this.guardarProfesor.addActionListener(aThis);
+        this.eliminarProfesor.addActionListener(aThis);
+        this.guardarCambiosProfesor.addActionListener(aThis);
+    }
+
+    private void updateTable(javax.swing.JTable t, Object o) {
+        t.setModel(model.getTable(o));
     }
 
     @Override
     public void update(Observable o, Object arg) {
-
+        updateTable(this.tableCursor, new Curso());
+        updateTable(this.tableProfesores, new Profesor());
     }
 
     /**
@@ -47,43 +74,81 @@ public class View extends javax.swing.JFrame implements Observer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jInternalFrame1 = new javax.swing.JInternalFrame();
+        profesorTablePopMenu = new javax.swing.JPopupMenu();
+        eliminarProfesor = new javax.swing.JMenuItem();
+        editarProfesor = new javax.swing.JMenuItem();
+        jToolBar1 = new javax.swing.JToolBar();
         Principal = new javax.swing.JPanel();
         encabezado = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
         cursosTab = new javax.swing.JLabel();
         profesoresTab = new javax.swing.JLabel();
+        SubTitulo = new javax.swing.JLabel();
         contenedorTable = new javax.swing.JPanel();
-        contenedorProfesores = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableProfesores = new javax.swing.JTable();
         contenedorCursos = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableCursor = new javax.swing.JTable();
+        agregarCurso = new javax.swing.JButton();
+        contenedorProfesores = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableProfesores = new javax.swing.JTable();
+        agregarProfesor = new javax.swing.JButton();
+        FormProfesor = new javax.swing.JPanel();
+        cancerlarProfesor = new javax.swing.JButton();
+        guardarProfesor = new javax.swing.JButton();
+        textNombre = new javax.swing.JTextField();
+        textCedula = new javax.swing.JTextField();
+        textEmail = new javax.swing.JTextField();
+        textTelefono = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
+        jSeparator9 = new javax.swing.JSeparator();
+        guardarCambiosProfesor = new javax.swing.JButton();
 
-        jInternalFrame1.setVisible(true);
+        profesorTablePopMenu.setBackground(new java.awt.Color(255, 255, 255));
+        profesorTablePopMenu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        profesorTablePopMenu.setForeground(new java.awt.Color(2, 116, 109));
+        profesorTablePopMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(2, 116, 109)));
 
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        eliminarProfesor.setBackground(new java.awt.Color(255, 255, 255));
+        eliminarProfesor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eliminarProfesor.setForeground(new java.awt.Color(2, 116, 109));
+        eliminarProfesor.setText("Eliminar profesor");
+        eliminarProfesor.setBorder(null);
+        profesorTablePopMenu.add(eliminarProfesor);
+
+        editarProfesor.setBackground(new java.awt.Color(255, 255, 255));
+        editarProfesor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        editarProfesor.setForeground(new java.awt.Color(2, 116, 109));
+        editarProfesor.setText("Editar profesor");
+        editarProfesor.setBorder(null);
+        editarProfesor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarProfesorActionPerformed(evt);
+            }
+        });
+        profesorTablePopMenu.add(editarProfesor);
+
+        jToolBar1.setRollover(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
 
         Principal.setBackground(new java.awt.Color(255, 255, 255));
+        Principal.setForeground(new java.awt.Color(255, 255, 255));
 
-        encabezado.setBackground(new java.awt.Color(3, 181, 170));
+        encabezado.setBackground(new java.awt.Color(255, 255, 255));
+        encabezado.setForeground(new java.awt.Color(255, 255, 255));
 
-        titulo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        titulo.setForeground(new java.awt.Color(255, 255, 255));
-        titulo.setText("Sistema de mantenimiento");
+        titulo.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        titulo.setForeground(new java.awt.Color(3, 181, 170));
+        titulo.setText("Lab 01");
 
         cursosTab.setBackground(new java.awt.Color(3, 181, 170));
         cursosTab.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -109,90 +174,53 @@ public class View extends javax.swing.JFrame implements Observer {
             }
         });
 
+        SubTitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SubTitulo.setForeground(new java.awt.Color(3, 181, 170));
+        SubTitulo.setText("Desktop");
+
         javax.swing.GroupLayout encabezadoLayout = new javax.swing.GroupLayout(encabezado);
         encabezado.setLayout(encabezadoLayout);
         encabezadoLayout.setHorizontalGroup(
             encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(encabezadoLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(titulo)
+                .addGroup(encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(encabezadoLayout.createSequentialGroup()
+                        .addComponent(titulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SubTitulo))
                     .addGroup(encabezadoLayout.createSequentialGroup()
                         .addComponent(cursosTab, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(profesoresTab, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105)))
+                        .addComponent(profesoresTab, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         encabezadoLayout.setVerticalGroup(
             encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(encabezadoLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(16, 16, 16)
+                .addGroup(encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titulo)
+                    .addComponent(SubTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(profesoresTab, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cursosTab, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         contenedorTable.setBackground(new java.awt.Color(255, 255, 255));
+        contenedorTable.setForeground(new java.awt.Color(255, 255, 255));
         contenedorTable.setLayout(new java.awt.CardLayout());
 
-        contenedorProfesores.setBackground(new java.awt.Color(255, 255, 255));
-
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setBorder(null);
-
-        tableProfesores.setBackground(new java.awt.Color(255, 255, 255));
-        tableProfesores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tableProfesores.setForeground(new java.awt.Color(12, 27, 51));
-        tableProfesores.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"111", "Diego ", "111", "diego@gmail.com"},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Cedula", "Nombre", "Telefono", "Email"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tableProfesores.setGridColor(new java.awt.Color(200, 224, 240));
-        tableProfesores.setRowHeight(30);
-        tableProfesores.setSelectionBackground(new java.awt.Color(12, 27, 51));
-        tableProfesores.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        tableProfesores.setShowGrid(false);
-        tableProfesores.setShowHorizontalLines(true);
-        jScrollPane1.setViewportView(tableProfesores);
-
-        javax.swing.GroupLayout contenedorProfesoresLayout = new javax.swing.GroupLayout(contenedorProfesores);
-        contenedorProfesores.setLayout(contenedorProfesoresLayout);
-        contenedorProfesoresLayout.setHorizontalGroup(
-            contenedorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
-        );
-        contenedorProfesoresLayout.setVerticalGroup(
-            contenedorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-        );
-
-        contenedorTable.add(contenedorProfesores, "card2");
-
         contenedorCursos.setBackground(new java.awt.Color(255, 255, 255));
+        contenedorCursos.setForeground(new java.awt.Color(255, 255, 255));
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane2.setBorder(null);
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         jScrollPane2.setForeground(new java.awt.Color(255, 255, 255));
 
         tableCursor.setBackground(new java.awt.Color(255, 255, 255));
+        tableCursor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         tableCursor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tableCursor.setForeground(new java.awt.Color(12, 27, 51));
         tableCursor.setModel(new javax.swing.table.DefaultTableModel(
@@ -200,17 +228,9 @@ public class View extends javax.swing.JFrame implements Observer {
 
             },
             new String [] {
-                "Codigo", "Nombre", "Ceditos", "Horas semanales", "Carrera"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-        });
+        ));
         tableCursor.setGridColor(new java.awt.Color(200, 224, 240));
         tableCursor.setRowHeight(30);
         tableCursor.setSelectionBackground(new java.awt.Color(12, 27, 51));
@@ -219,18 +239,97 @@ public class View extends javax.swing.JFrame implements Observer {
         tableCursor.setShowHorizontalLines(true);
         jScrollPane2.setViewportView(tableCursor);
 
+        agregarCurso.setBackground(new java.awt.Color(255, 255, 255));
+        agregarCurso.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        agregarCurso.setForeground(new java.awt.Color(3, 181, 170));
+        agregarCurso.setText("+");
+        agregarCurso.setToolTipText("");
+        agregarCurso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        agregarCurso.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        agregarCurso.setName(""); // NOI18N
+        agregarCurso.setOpaque(false);
+        agregarCurso.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout contenedorCursosLayout = new javax.swing.GroupLayout(contenedorCursos);
         contenedorCursos.setLayout(contenedorCursosLayout);
         contenedorCursosLayout.setHorizontalGroup(
             contenedorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
+            .addGroup(contenedorCursosLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(agregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         contenedorCursosLayout.setVerticalGroup(
             contenedorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+            .addGroup(contenedorCursosLayout.createSequentialGroup()
+                .addComponent(agregarCurso)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         contenedorTable.add(contenedorCursos, "card3");
+
+        contenedorProfesores.setBackground(new java.awt.Color(255, 255, 255));
+        contenedorProfesores.setForeground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
+
+        tableProfesores.setBackground(new java.awt.Color(255, 255, 255));
+        tableProfesores.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        tableProfesores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tableProfesores.setForeground(new java.awt.Color(2, 116, 109));
+        tableProfesores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tableProfesores.setComponentPopupMenu(profesorTablePopMenu);
+        tableProfesores.setGridColor(new java.awt.Color(200, 224, 240));
+        tableProfesores.setRowHeight(30);
+        tableProfesores.setSelectionBackground(new java.awt.Color(2, 116, 109));
+        tableProfesores.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableProfesores.setShowGrid(false);
+        tableProfesores.setShowHorizontalLines(true);
+        jScrollPane1.setViewportView(tableProfesores);
+
+        agregarProfesor.setBackground(new java.awt.Color(255, 255, 255));
+        agregarProfesor.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        agregarProfesor.setForeground(new java.awt.Color(3, 181, 170));
+        agregarProfesor.setText("+");
+        agregarProfesor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        agregarProfesor.setOpaque(false);
+        agregarProfesor.setRequestFocusEnabled(false);
+        agregarProfesor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                agregarProfesorMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout contenedorProfesoresLayout = new javax.swing.GroupLayout(contenedorProfesores);
+        contenedorProfesores.setLayout(contenedorProfesoresLayout);
+        contenedorProfesoresLayout.setHorizontalGroup(
+            contenedorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(contenedorProfesoresLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(agregarProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        contenedorProfesoresLayout.setVerticalGroup(
+            contenedorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(contenedorProfesoresLayout.createSequentialGroup()
+                .addComponent(agregarProfesor)
+                .addGap(0, 270, Short.MAX_VALUE))
+        );
+
+        contenedorTable.add(contenedorProfesores, "card2");
 
         javax.swing.GroupLayout PrincipalLayout = new javax.swing.GroupLayout(Principal);
         Principal.setLayout(PrincipalLayout);
@@ -243,8 +342,153 @@ public class View extends javax.swing.JFrame implements Observer {
             PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PrincipalLayout.createSequentialGroup()
                 .addComponent(encabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(contenedorTable, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contenedorTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        FormProfesor.setBackground(new java.awt.Color(255, 255, 255));
+        FormProfesor.setForeground(new java.awt.Color(255, 255, 255));
+
+        cancerlarProfesor.setBackground(new java.awt.Color(255, 255, 255));
+        cancerlarProfesor.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        cancerlarProfesor.setForeground(new java.awt.Color(234, 82, 111));
+        cancerlarProfesor.setText("Cancelar");
+        cancerlarProfesor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        cancerlarProfesor.setOpaque(false);
+        cancerlarProfesor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancerlarProfesorMouseClicked(evt);
+            }
+        });
+
+        guardarProfesor.setBackground(new java.awt.Color(255, 255, 255));
+        guardarProfesor.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        guardarProfesor.setForeground(new java.awt.Color(57, 115, 103));
+        guardarProfesor.setText("Guardar profesor");
+        guardarProfesor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        guardarProfesor.setRequestFocusEnabled(false);
+
+        textNombre.setBackground(new java.awt.Color(255, 255, 255));
+        textNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textNombre.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        textNombre.setBorder(null);
+        textNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        textNombre.setOpaque(false);
+        textNombre.setSelectionColor(new java.awt.Color(3, 181, 170));
+
+        textCedula.setBackground(new java.awt.Color(255, 255, 255));
+        textCedula.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textCedula.setBorder(null);
+
+        textEmail.setBackground(new java.awt.Color(255, 255, 255));
+        textEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textEmail.setBorder(null);
+
+        textTelefono.setBackground(new java.awt.Color(255, 255, 255));
+        textTelefono.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textTelefono.setBorder(null);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(3, 181, 170));
+        jLabel1.setText("Datos de nuevo Profesor");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(2, 116, 109));
+        jLabel2.setText("Nombre");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(2, 116, 109));
+        jLabel3.setText("Email");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(2, 116, 109));
+        jLabel4.setText("Cedula");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(2, 116, 109));
+        jLabel5.setText("Telefono");
+
+        guardarCambiosProfesor.setBackground(new java.awt.Color(255, 255, 255));
+        guardarCambiosProfesor.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        guardarCambiosProfesor.setForeground(new java.awt.Color(57, 115, 103));
+        guardarCambiosProfesor.setText("Guardar cambios");
+        guardarCambiosProfesor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        guardarCambiosProfesor.setRequestFocusEnabled(false);
+
+        javax.swing.GroupLayout FormProfesorLayout = new javax.swing.GroupLayout(FormProfesor);
+        FormProfesor.setLayout(FormProfesorLayout);
+        FormProfesorLayout.setHorizontalGroup(
+            FormProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FormProfesorLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(FormProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FormProfesorLayout.createSequentialGroup()
+                        .addGroup(FormProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(FormProfesorLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(65, 65, 65)
+                                .addComponent(guardarProfesor)
+                                .addGap(32, 32, 32)
+                                .addComponent(cancerlarProfesor))
+                            .addGroup(FormProfesorLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(guardarCambiosProfesor)))
+                        .addGap(0, 42, Short.MAX_VALUE))
+                    .addGroup(FormProfesorLayout.createSequentialGroup()
+                        .addGroup(FormProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(FormProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(textNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addComponent(jSeparator6))
+                            .addGroup(FormProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(textCedula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE))
+                            .addComponent(jLabel5)
+                            .addGroup(FormProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jSeparator9, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(textTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
+                            .addComponent(jLabel3)
+                            .addGroup(FormProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(textEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        FormProfesorLayout.setVerticalGroup(
+            FormProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FormProfesorLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(FormProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(guardarProfesor)
+                    .addComponent(cancerlarProfesor))
+                .addGap(16, 16, 16)
+                .addGroup(FormProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(guardarCambiosProfesor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -252,10 +496,14 @@ public class View extends javax.swing.JFrame implements Observer {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(FormProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Principal, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(Principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(FormProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -275,6 +523,33 @@ public class View extends javax.swing.JFrame implements Observer {
         this.contenedorProfesores.setVisible(true);
     }//GEN-LAST:event_profesoresTabMouseClicked
 
+    private void agregarProfesorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarProfesorMouseClicked
+        this.FormProfesor.setVisible(true);
+        this.guardarProfesor.setVisible(true);
+        this.textCedula.setEditable(true);
+        this.guardarCambiosProfesor.setVisible(false);
+        this.Principal.setVisible(false);
+    }//GEN-LAST:event_agregarProfesorMouseClicked
+
+    private void cancerlarProfesorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancerlarProfesorMouseClicked
+        this.volverAPrincipal();
+        this.limpiarEspaciosPanelAgregarProfesor();
+    }//GEN-LAST:event_cancerlarProfesorMouseClicked
+
+    private void editarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarProfesorActionPerformed
+        this.FormProfesor.setVisible(true);
+        this.guardarProfesor.setVisible(false);
+        this.guardarCambiosProfesor.setVisible(true);
+        this.Principal.setVisible(false);
+        int row = this.getSelectedRowTableProfesores();
+        TableModel tablemodel = this.tableProfesores.getModel();
+        this.textCedula.setText(tablemodel.getValueAt(row, 0).toString());
+        this.textNombre.setText(tablemodel.getValueAt(row, 1).toString());
+        this.textEmail.setText(tablemodel.getValueAt(row, 2).toString());
+        this.textTelefono.setText(tablemodel.getValueAt(row, 3).toString());
+        this.textCedula.setEditable(false);
+    }//GEN-LAST:event_editarProfesorActionPerformed
+
     private void setLblColor(javax.swing.JLabel l) {
         l.setBackground(new Color(2, 116, 109));
     }
@@ -283,20 +558,76 @@ public class View extends javax.swing.JFrame implements Observer {
         l.setBackground(new Color(3, 181, 170));
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel FormProfesor;
     private javax.swing.JPanel Principal;
+    private javax.swing.JLabel SubTitulo;
+    private javax.swing.JButton agregarCurso;
+    private javax.swing.JButton agregarProfesor;
+    private javax.swing.JButton cancerlarProfesor;
     private javax.swing.JPanel contenedorCursos;
     private javax.swing.JPanel contenedorProfesores;
     private javax.swing.JPanel contenedorTable;
     private javax.swing.JLabel cursosTab;
+    private javax.swing.JMenuItem editarProfesor;
+    private javax.swing.JMenuItem eliminarProfesor;
     private javax.swing.JPanel encabezado;
-    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JButton guardarCambiosProfesor;
+    private javax.swing.JButton guardarProfesor;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JPopupMenu profesorTablePopMenu;
     private javax.swing.JLabel profesoresTab;
     private javax.swing.JTable tableCursor;
     private javax.swing.JTable tableProfesores;
+    private javax.swing.JTextField textCedula;
+    private javax.swing.JTextField textEmail;
+    private javax.swing.JTextField textNombre;
+    private javax.swing.JTextField textTelefono;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
+
+    public String getTextCedula() {
+        return textCedula.getText();
+    }
+
+    public String getTextEmail() {
+        return textEmail.getText();
+    }
+
+    public String getTextNombre() {
+        return textNombre.getText();
+    }
+
+    public String getTextTelefono() {
+        return textTelefono.getText();
+    }
+
+    public void limpiarEspaciosPanelAgregarProfesor() {
+        this.textCedula.setText("");
+        this.textEmail.setText("");
+        this.textNombre.setText("");
+        this.textTelefono.setText("");
+
+    }
+
+    public void volverAPrincipal() {
+        this.Principal.setVisible(true);
+        this.FormProfesor.setVisible(false);
+    }
+
+    public int getSelectedRowTableProfesores() {
+        return this.tableProfesores.getSelectedRow();
+    }
+
 }
