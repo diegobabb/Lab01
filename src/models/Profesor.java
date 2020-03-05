@@ -7,44 +7,29 @@ package models;
  */
 public class Profesor {
 
-    
-    private int id;
     private String cedula;
     private String nombre;
     private String telefono;
     private String email;
+    private String curso;
 
-    public Profesor(int id, String cedula, String nombre, String telefono, String email) {
-        this.id = id;
+
+    public Profesor(String cedula, String nombre, String telefono, String email, String curso) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
+        this.curso = curso;
     }
 
-    public Profesor(String cedula, String nombre, String telefono, String email) {
-        this.id = -1;
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.email = email;
-    }
-
-    public Profesor() {
-        this.id = -1;
+    public Profesor() {;
         this.cedula = "";
         this.nombre = "";
         this.telefono = "";
         this.email = "";
+        this.curso = "";
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getCedula() {
         return cedula;
@@ -78,8 +63,13 @@ public class Profesor {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Profesor{" + "id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", telefono=" + telefono + ", email=" + email + '}';
+    public String getCurso() {
+        return curso;
     }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+   
+ 
 }

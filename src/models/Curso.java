@@ -18,37 +18,36 @@ public class Curso {
     String nombre;
     int credito;
     int horas;
-    Carrera carrera;
+    int carrera;
     List<Grupo> grupos;
 
-    public Curso(int id, String codigo, String nombre, int credito, int horas) {
-        this.id = id;
+    public Curso(String codigo, String nombre, int creditos, int horas, int carrera) {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.credito = credito;
+        this.credito = creditos;
         this.horas = horas;
-        this.carrera = new Carrera();
-        this.grupos = new ArrayList<>();
-    }
-    
-
-    public Curso(String codigo, String nombre, int credito, int horas) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.credito = credito;
-        this.horas = horas;
-        this.carrera = new Carrera();
+        this.carrera = carrera;
         this.grupos = new ArrayList<>();
     }
 
     public Curso(){
+        this.id = 0;
         this.codigo = new String();
         this.nombre = new String();
         this.credito = 0;
         this.horas = 0;
         this.grupos = new ArrayList<>();
-        this.carrera = new Carrera();
+        this.carrera = 0;
     }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 
     public String getCodigo() {
         return codigo;
@@ -90,9 +89,13 @@ public class Curso {
         this.grupos.remove(grupo);
     }
 
-    @Override
-    public String toString() {
-        return "Curso{" + "id=" + id + ", codigo=" + codigo + ", nombre=" + nombre + ", credito=" + credito + ", horas=" + horas + ", carrera=" + carrera + ", grupos=" + grupos + '}';
+    public int getCarrera() {
+        return carrera;
     }
+
+    public void setCarrera(int carrera) {
+        this.carrera = carrera;
+    }
+
     
 }

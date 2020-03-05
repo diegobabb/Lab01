@@ -5,6 +5,8 @@
  */
 package models;
 
+import models.Ciclo;
+
 /**
  *
  * @author jorac

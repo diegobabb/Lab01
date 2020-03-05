@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models;
+package logic;
 
 /**
  *
@@ -16,9 +16,27 @@ public class Carrera {
     private String nombre;
     
     public Carrera() {
-        this.id = 1;
-        this.codigo = "EIF";
-        this.nombre = "Ingenieria en Sistemas";
+        this.id = 0;
+        this.codigo = new String();
+        this.nombre = new String();
+    }
+
+    public Carrera(int id, String codigo, String nombre) {
+        this.id = id;
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
     public int getId() {

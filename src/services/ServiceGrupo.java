@@ -13,9 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Profesor;
 import models.Curso;
 import models.Grupo;
-import models.Profesor;
 import oracle.jdbc.internal.OracleTypes;
 import static services.Service.connection;
 
