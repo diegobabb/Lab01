@@ -46,9 +46,27 @@ public class TableCursos extends AbstractTableModel {
             case 3:
                 return this.data.get(rowIndex).getHoras();
             case 4:
-                return this.data.get(rowIndex).getCarrera().getNombre();
+                return this.getCarreraNombre(this.data.get(rowIndex).getCarrera());
         }
         return null;
+    }
+
+    public Curso getCurso(int i) {
+        return this.data.get(i);
+    }
+
+    private String getCarreraNombre(int i) {
+        switch (i) {
+            case 1:
+                return "Ingenieria en Sistemas";
+            case 2:
+                return "Administracion de Empresas";
+            case 3:
+                return "Matematicas";
+            case 4:
+                return "Educacion";
+        }
+        return "Sin definir";
     }
 
     @Override
@@ -66,6 +84,19 @@ public class TableCursos extends AbstractTableModel {
                 return "Carrera";
         }
         return "???";
+    }
+
+    void add(Curso curso) {
+        this.data.add(curso);
+    }
+
+    void update(Curso curso) {
+        this.data.remove(curso);
+        this.data.add(curso);
+    }
+
+    void remove(int selectedRowTableCurso) {
+        this.data.remove(selectedRowTableCurso);
     }
 
 }

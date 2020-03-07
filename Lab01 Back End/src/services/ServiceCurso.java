@@ -24,16 +24,17 @@ import static services.Service.connection;
  * @author diego
  */
 public class ServiceCurso extends Service {
-    private static final String INSERT = "{call INSERTAR_CURSO(?,?,?,?)}";
-    private static final String UPDATE = "{call MODIFICAR_CURSO(?,?,?,?)}";
+
+    private static final String INSERT = "{call INSERTAR_CURSO(?,?,?,?,?)}";
+    private static final String UPDATE = "{call MODIFICAR_CURSO(?,?,?,?,?)}";
     private static final String FIND = "{?=call BUSCAR_CURSO(?)}";
     private static final String SELECTALL = "{?=call LISTAR_CURSO()}";
     private static final String DELETE = "{call ELIMINAR_CURSO(?)}";
-    
+
     public ServiceCurso() {
     }
-    
-     public void insert(Curso curso) throws GlobalException, NoDataException {
+
+    public void insert(Curso curso) throws GlobalException, NoDataException {
         try {
             connection();
         } catch (SQLException e) {
@@ -49,6 +50,7 @@ public class ServiceCurso extends Service {
             pstmt.setString(2, curso.getNombre());
             pstmt.setInt(3, curso.getCredito());
             pstmt.setInt(4, curso.getHoras());
+            pstmt.setInt(5, curso.getCarrera());
             boolean resultado = pstmt.execute();
             if (resultado == true) {
                 throw new NoDataException("No se realizo la insercion");
@@ -66,10 +68,10 @@ public class ServiceCurso extends Service {
                 throw new GlobalException("Estatutos invalidos o nulos");
             }
         }
-    
+
     }
-     
-     public void update(Curso curso) throws GlobalException, NoDataException {
+
+    public void update(Curso curso) throws GlobalException, NoDataException {
         try {
             connection();
         } catch (ClassNotFoundException e) {
@@ -84,11 +86,12 @@ public class ServiceCurso extends Service {
             pstmt.setString(2, curso.getNombre());
             pstmt.setInt(3, curso.getCredito());
             pstmt.setInt(4, curso.getHoras());
+            pstmt.setInt(5, curso.getCarrera());
             int resultado = pstmt.executeUpdate();
 
             if (resultado == 0) {
                 throw new NoDataException("No se realizo la actualización");
-            } 
+            }
         } catch (SQLException e) {
             throw new GlobalException("Sentencia no valida");
         } finally {
@@ -102,8 +105,8 @@ public class ServiceCurso extends Service {
             }
         }
     }
-     
-     public Curso find(String codigo) throws GlobalException, NoDataException {
+
+    public Curso find(String codigo) throws GlobalException, NoDataException {
 
         try {
             connection();
@@ -127,8 +130,9 @@ public class ServiceCurso extends Service {
                         rs.getString("CODIGO"),
                         rs.getString("NOMBRE"),
                         rs.getInt("CREDITOS"),
-                        rs.getInt("HORAS_SEMANALES")
-                        );
+                        rs.getInt("HORAS_SEMANALES"),
+                        rs.getInt("CARRERA")
+                );
             }
         } catch (SQLException e) {
             throw new GlobalException("Sentencia no valida");
@@ -145,16 +149,15 @@ public class ServiceCurso extends Service {
                 throw new GlobalException("Estatutos invalidos o nulos");
             }
         }
-        
-        if (curso == null ) {
+
+        if (curso == null) {
             throw new NoDataException("No hay datos");
         }
-        
-        
+
         return curso;
     }
-     
-     public ArrayList selectAll() throws GlobalException, NoDataException {
+
+    public ArrayList selectAll() throws GlobalException, NoDataException {
         try {
             connection();
         } catch (ClassNotFoundException ex) {
@@ -173,12 +176,13 @@ public class ServiceCurso extends Service {
             pstmt.execute();
             rs = (ResultSet) pstmt.getObject(1);
             while (rs.next()) {
-                 curso = new Curso(
+                curso = new Curso(
                         rs.getString("CODIGO"),
                         rs.getString("NOMBRE"),
                         rs.getInt("CREDITOS"),
-                        rs.getInt("HORAS_SEMANALES")
-                        );
+                        rs.getInt("HORAS_SEMANALES"),
+                        rs.getInt("CARRERA")
+                );
                 coleccion.add(curso);
             }
         } catch (SQLException e) {
@@ -202,8 +206,8 @@ public class ServiceCurso extends Service {
         }
         return coleccion;
     }
-     
-     public void delete(String codigo) throws GlobalException, NoDataException {
+
+    public void delete(String codigo) throws GlobalException, NoDataException {
         try {
             connection();
         } catch (ClassNotFoundException e) {
@@ -220,7 +224,7 @@ public class ServiceCurso extends Service {
 
             if (resultado == 0) {
                 throw new NoDataException("No se realizo el borrado");
-            } 
+            }
         } catch (SQLException e) {
             throw new GlobalException("Sentencia no valida");
         } finally {

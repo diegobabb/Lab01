@@ -1,4 +1,3 @@
-
 package models;
 
 import java.util.Objects;
@@ -8,27 +7,30 @@ import java.util.Objects;
  * @author diego
  */
 public class Profesor {
-    
+
     private int id;
     private String cedula;
     private String nombre;
     private String telefono;
     private String email;
+    private int curso;
 
-    public Profesor(int id, String cedula, String nombre, String telefono, String email) {
+    public Profesor(int id, String cedula, String nombre, String telefono, String email, int curso) {
         this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
+        this.curso = curso;
     }
 
-    public Profesor(String cedula, String nombre, String telefono, String email) {
+    public Profesor(String cedula, String nombre, String telefono, String email, int curso) {
         this.id = -1;
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
+        this.curso = curso;
     }
 
     public Profesor() {
@@ -37,6 +39,11 @@ public class Profesor {
         this.nombre = "";
         this.telefono = "";
         this.email = "";
+        this.curso = -1;
+    }
+
+    public int getCurso() {
+        return curso;
     }
 
     public int getId() {

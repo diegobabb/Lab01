@@ -18,12 +18,11 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] args) {
-        
         try {
             Controller c = new Controller();
         } catch (GlobalException | NoDataException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

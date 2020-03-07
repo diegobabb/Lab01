@@ -17,8 +17,8 @@ import java.util.logging.Logger;
  */
 public class ServiceProfesor extends Service {
 
-    private static final String INSERT = "{call INSERTAR_PROFESOR(?,?,?,?)}";
-    private static final String UPDATE = "{call MODIFICAR_PROFESOR(?,?,?,?)}";
+    private static final String INSERT = "{call INSERTAR_PROFESOR(?,?,?,?,?)}";
+    private static final String UPDATE = "{call MODIFICAR_PROFESOR(?,?,?,?,?)}";
     private static final String FIND = "{?=call BUSCAR_PROFESOR(?)}";
     private static final String SELECTALL = "{?=call LISTAR_PROFESOR()}";
     private static final String DELETE = "{call ELIMINAR_PROFESOR(?)}";
@@ -48,6 +48,7 @@ public class ServiceProfesor extends Service {
             pstmt.setString(2, profesor.getNombre());
             pstmt.setString(3, profesor.getTelefono());
             pstmt.setString(4, profesor.getEmail());
+            pstmt.setInt(5, profesor.getCurso());
             boolean resultado = pstmt.execute();
             if (resultado == true) {
                 throw new NoDataException("No se realizo la insercion");
@@ -90,6 +91,7 @@ public class ServiceProfesor extends Service {
             pstmt.setString(2, profesor.getNombre());
             pstmt.setString(3, profesor.getTelefono());
             pstmt.setString(4, profesor.getEmail());
+            pstmt.setInt(5, profesor.getCurso());
             int resultado = pstmt.executeUpdate();
 
             if (resultado == 0) {
@@ -142,7 +144,8 @@ public class ServiceProfesor extends Service {
                 profesor = new Profesor(rs.getString("CEDULA"),
                         rs.getString("NOMBRE"),
                         rs.getString("TELEFONO"),
-                        rs.getString("EMAIL"));
+                        rs.getString("EMAIL"),
+                        rs.getInt("CURSO"));
                 coleccion.add(profesor);
             }
         } catch (SQLException e) {
@@ -196,7 +199,8 @@ public class ServiceProfesor extends Service {
                 elProfesor = new Profesor(rs.getString("CEDULA"),
                         rs.getString("NOMBRE"),
                         rs.getString("TELEFONO"),
-                        rs.getString("EMAIL"));
+                        rs.getString("EMAIL"),
+                        rs.getInt("CURSO"));
                 coleccion.add(elProfesor);
             }
         } catch (SQLException e) {

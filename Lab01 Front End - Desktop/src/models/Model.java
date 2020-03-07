@@ -11,6 +11,7 @@ import java.util.Observable;
 import javax.swing.table.TableModel;
 import services.ServiceCurso;
 import services.ServiceProfesor;
+import services.ServiceUsuario;
 
 /**
  *
@@ -64,7 +65,52 @@ public class Model extends Observable {
         ServiceProfesor SP = new ServiceProfesor();
         SP.update(p);
         this.tableProfesores.update(p);
-        this.tableProfesores.add(p);
         this.update();
+    }
+
+    public void agregarCurso(Curso curso) throws GlobalException, NoDataException {
+        ServiceCurso SP = new ServiceCurso();
+        SP.insert(curso);
+        this.tableCursos.add(curso);
+        this.update();
+    }
+
+    public Curso getCurso(int row) {
+        return this.tableCursos.getCurso(row);
+    }
+
+    public Profesor getProfesor(int row) {
+        return this.tableProfesores.getProfesor(row);
+    }
+
+    public void actualizarCurso(Curso curso) throws GlobalException, NoDataException {
+        ServiceCurso SC = new ServiceCurso();
+        SC.update(curso);
+        this.tableCursos.update(curso);
+        this.update();
+    }
+
+    public void eliminarCurso(int selectedRowTableCurso) throws GlobalException, NoDataException {
+        ServiceCurso SC = new ServiceCurso();
+        SC.delete(this.tableProfesores.getCedula(selectedRowTableCurso));
+        this.tableCursos.remove(selectedRowTableCurso);
+        this.update();
+    }
+
+    public void login(String usuario, String contrasena) throws GlobalException, NoDataException {
+        ServiceUsuario SU = new ServiceUsuario();
+        SU.find(usuario, contrasena);
+    }
+
+    public void logout() {
+        Usuario.logout();
+    }
+
+    public TableProfesor getTableProfesores() {
+        return this.tableProfesores;
+    }
+
+    public TableCursos getTableCursos() {
+        return tableCursos;
     }
 }

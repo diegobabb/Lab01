@@ -7,6 +7,7 @@ package models;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -78,6 +79,11 @@ public class TableProfesor extends AbstractTableModel {
 
     void update(Profesor p) {
         this.data.remove(p);
+        this.data.add(p);
+    }
+
+    Profesor getProfesor(int row) {
+        return this.data.get(row);
     }
 
 }
