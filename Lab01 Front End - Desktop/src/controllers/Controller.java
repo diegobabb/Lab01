@@ -71,14 +71,14 @@ public class Controller implements ActionListener {
             String nombre = this.view.getTextNombre();
             String email = this.view.getTextEmail();
             String telefono = this.view.getTextTelefono();
-            int curso = this.view.getSelectedIndexComboBoxCurso();
+            String curso = model.getCurso(this.view.getSelectedIndexComboBoxCurso()).getCodigo();
             if (!cedula.isEmpty() && !nombre.isEmpty() && !email.isEmpty() && !telefono.isEmpty()) {
                 String regex = "^(.+)@(.+)$";
                 Pattern pattern = Pattern.compile(regex);
                 if (pattern.matcher(email).matches()) {
                     if (cedula.length() == 9) {
                         if (telefono.length() == 8) {
-                            this.model.actualizarProfesor(new Profesor(view.getTextCedula(), view.getTextNombre(), view.getTextEmail(), view.getTextTelefono(), curso));
+                            this.model.actualizarProfesor(new Profesor(cedula, nombre, telefono, email, curso));
                             this.view.limpiarEspaciosPanelAgregarProfesor();
                             JOptionPane.showMessageDialog(null, "Profesor actualizado!!", "information", JOptionPane.OK_OPTION);
                             this.view.volverAPrincipal();
@@ -116,14 +116,15 @@ public class Controller implements ActionListener {
             String nombre = this.view.getTextNombre();
             String email = this.view.getTextEmail();
             String telefono = this.view.getTextTelefono();
-            int curso = this.view.getSelectedIndexComboBoxCurso();
+            String curso = model.getCurso(this.view.getSelectedIndexComboBoxCurso()).getCodigo();
+            System.out.println(curso);
             if (!cedula.isEmpty() && !nombre.isEmpty() && !email.isEmpty() && !telefono.isEmpty()) {
                 String regex = "^(.+)@(.+)$";
                 Pattern pattern = Pattern.compile(regex);
                 if (pattern.matcher(email).matches()) {
                     if (cedula.length() == 9) {
-                        if (true) {
-                            this.model.agregarProfesor(new Profesor(cedula, nombre, email, telefono, curso));
+                        if (telefono.length() == 8) {
+                            this.model.agregarProfesor(new Profesor(cedula, nombre, telefono, email, curso));
                             this.view.limpiarEspaciosPanelAgregarProfesor();
                             JOptionPane.showMessageDialog(null, "Profesor agregado!!", "information", JOptionPane.OK_OPTION);
                             this.view.volverAPrincipal();

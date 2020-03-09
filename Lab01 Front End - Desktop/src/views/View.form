@@ -652,7 +652,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="tableProfesores">
+                    <Component class="javax.swing.JTable" name="tableProfesor">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1099,12 +1099,7 @@
               <Color blue="aa" green="b5" red="3" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Informatica"/>
-                <StringItem index="1" value="Administracion de Empresas"/>
-                <StringItem index="2" value="Matematicas"/>
-                <StringItem index="3" value="Educacion"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>

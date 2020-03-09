@@ -7,7 +7,6 @@ package models;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -26,7 +25,7 @@ public class TableProfesor extends AbstractTableModel {
     }
     
     public void add(Profesor p){
-        data.add(p);
+        this.data.add(p);
     }
 
     @Override

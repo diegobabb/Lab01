@@ -48,7 +48,7 @@ public class ServiceProfesor extends Service {
             pstmt.setString(2, profesor.getNombre());
             pstmt.setString(3, profesor.getTelefono());
             pstmt.setString(4, profesor.getEmail());
-            pstmt.setInt(5, profesor.getCurso());
+            pstmt.setString(5, profesor.getCurso());
             boolean resultado = pstmt.execute();
             if (resultado == true) {
                 throw new NoDataException("No se realizo la insercion");
@@ -91,7 +91,7 @@ public class ServiceProfesor extends Service {
             pstmt.setString(2, profesor.getNombre());
             pstmt.setString(3, profesor.getTelefono());
             pstmt.setString(4, profesor.getEmail());
-            pstmt.setInt(5, profesor.getCurso());
+            pstmt.setString(5, profesor.getCurso());
             int resultado = pstmt.executeUpdate();
 
             if (resultado == 0) {
@@ -145,7 +145,7 @@ public class ServiceProfesor extends Service {
                         rs.getString("NOMBRE"),
                         rs.getString("TELEFONO"),
                         rs.getString("EMAIL"),
-                        rs.getInt("CURSO"));
+                        rs.getString("CURSO"));
                 coleccion.add(profesor);
             }
         } catch (SQLException e) {
@@ -196,11 +196,12 @@ public class ServiceProfesor extends Service {
             pstmt.execute();
             rs = (ResultSet) pstmt.getObject(1);
             while (rs.next()) {
-                elProfesor = new Profesor(rs.getString("CEDULA"),
+                elProfesor = new Profesor(
+                        rs.getString("CEDULA"),
                         rs.getString("NOMBRE"),
                         rs.getString("TELEFONO"),
                         rs.getString("EMAIL"),
-                        rs.getInt("CURSO"));
+                        rs.getString("CURSO"));
                 coleccion.add(elProfesor);
             }
         } catch (SQLException e) {

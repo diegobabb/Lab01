@@ -10,8 +10,6 @@ import exceptions.NoDataException;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import models.Profesor;
 import models.Usuario;
 import oracle.jdbc.internal.OracleTypes;
 import static services.Service.connection;

@@ -8,7 +8,7 @@ package models;
 import exceptions.GlobalException;
 import exceptions.NoDataException;
 import java.util.Observable;
-import javax.swing.table.TableModel;
+import javax.swing.DefaultComboBoxModel;
 import services.ServiceCurso;
 import services.ServiceProfesor;
 import services.ServiceUsuario;
@@ -38,13 +38,6 @@ public class Model extends Observable {
     public void addObserver(java.util.Observer o) {
         super.addObserver(o);
         this.update();
-    }
-
-    public TableModel getTable(Object o) {
-        if (o instanceof Profesor) {
-            return this.tableProfesores;
-        }
-        return this.tableCursos;
     }
 
     public void agregarProfesor(Profesor p) throws GlobalException, NoDataException {
@@ -112,5 +105,17 @@ public class Model extends Observable {
 
     public TableCursos getTableCursos() {
         return tableCursos;
+    }
+
+    public int getCursoPosition(String curso) {
+        return this.tableCursos.findRow(curso);
+    }
+
+    public DefaultComboBoxModel<String> getComboBoxCursos() {
+        String[] array = new String[this.tableCursos.getData().size()];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = this.tableCursos.getCurso(i).getNombre();
+        }
+        return new DefaultComboBoxModel<String>(array);
     }
 }

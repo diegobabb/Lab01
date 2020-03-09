@@ -127,16 +127,16 @@ public final class View extends javax.swing.JFrame implements Observer {
         });
 
         sorterProfesores = new TableRowSorter<TableProfesor>(this.model.getTableProfesores());
-        this.tableProfesores.setRowSorter(sorterProfesores);
-        tableProfesores.getSelectionModel().addListSelectionListener(
+        this.tableProfesor.setRowSorter(sorterProfesores);
+        tableProfesor.getSelectionModel().addListSelectionListener(
                 new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
-                int viewRow = tableProfesores.getSelectedRow();
+                int viewRow = tableProfesor.getSelectedRow();
                 if (viewRow < 0) {
                     System.out.println();
                 } else {
                     int modelRow
-                            = tableProfesores.convertRowIndexToModel(viewRow);
+                            = tableProfesor.convertRowIndexToModel(viewRow);
                     System.out.println(
                             String.format("Selected Row in view: %d. "
                                     + "Selected Row in model: %d.",
@@ -149,7 +149,7 @@ public final class View extends javax.swing.JFrame implements Observer {
     }
 
     void initHeader() {
-        JTableHeader tableProfesoresHeader = this.tableProfesores.getTableHeader();
+        JTableHeader tableProfesoresHeader = this.tableProfesor.getTableHeader();
         JTableHeader tableCursorHeader = this.tableCursor.getTableHeader();
         tableProfesoresHeader.setBackground(new java.awt.Color(3, 181, 170));
         tableProfesoresHeader.setFont(new java.awt.Font("Segoe UI", 0, 15));
@@ -171,14 +171,14 @@ public final class View extends javax.swing.JFrame implements Observer {
         this.logoutButton.addActionListener(aThis);
     }
 
-    private void updateTable(javax.swing.JTable t, Object o) {
-        t.setModel(model.getTable(o));
-    }
-
     @Override
     public void update(Observable o, Object arg) {
-        updateTable(this.tableCursor, new Curso());
-        updateTable(this.tableProfesores, new Profesor());
+        this.tableProfesor.setModel(model.getTableProfesores());
+        this.tableCursor.setModel(model.getTableCursos());
+        this.sorterProfesores = new TableRowSorter<TableProfesor>(this.model.getTableProfesores());
+        this.tableProfesor.setRowSorter(sorterProfesores);
+        this.sorterCursos = new TableRowSorter<TableCursos>(this.model.getTableCursos());
+        this.tableCursor.setRowSorter(sorterCursos);
     }
 
     /**
@@ -214,7 +214,7 @@ public final class View extends javax.swing.JFrame implements Observer {
         jLabel14 = new javax.swing.JLabel();
         contenedorProfesores = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableProfesores = new javax.swing.JTable();
+        tableProfesor = new javax.swing.JTable();
         agregarProfesor = new javax.swing.JButton();
         filterTextProfesor = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -499,11 +499,11 @@ public final class View extends javax.swing.JFrame implements Observer {
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
 
-        tableProfesores.setBackground(new java.awt.Color(255, 255, 255));
-        tableProfesores.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        tableProfesores.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        tableProfesores.setForeground(new java.awt.Color(2, 116, 109));
-        tableProfesores.setModel(new javax.swing.table.DefaultTableModel(
+        tableProfesor.setBackground(new java.awt.Color(255, 255, 255));
+        tableProfesor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        tableProfesor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tableProfesor.setForeground(new java.awt.Color(2, 116, 109));
+        tableProfesor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -511,14 +511,14 @@ public final class View extends javax.swing.JFrame implements Observer {
 
             }
         ));
-        tableProfesores.setComponentPopupMenu(profesorTablePopMenu);
-        tableProfesores.setGridColor(new java.awt.Color(200, 224, 240));
-        tableProfesores.setRowHeight(30);
-        tableProfesores.setSelectionBackground(new java.awt.Color(2, 116, 109));
-        tableProfesores.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        tableProfesores.setShowGrid(false);
-        tableProfesores.setShowHorizontalLines(true);
-        jScrollPane1.setViewportView(tableProfesores);
+        tableProfesor.setComponentPopupMenu(profesorTablePopMenu);
+        tableProfesor.setGridColor(new java.awt.Color(200, 224, 240));
+        tableProfesor.setRowHeight(30);
+        tableProfesor.setSelectionBackground(new java.awt.Color(2, 116, 109));
+        tableProfesor.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tableProfesor.setShowGrid(false);
+        tableProfesor.setShowHorizontalLines(true);
+        jScrollPane1.setViewportView(tableProfesor);
 
         agregarProfesor.setBackground(new java.awt.Color(255, 255, 255));
         agregarProfesor.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
@@ -679,7 +679,6 @@ public final class View extends javax.swing.JFrame implements Observer {
         comboBoxCurso.setBackground(new java.awt.Color(255, 255, 255));
         comboBoxCurso.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         comboBoxCurso.setForeground(new java.awt.Color(3, 181, 170));
-        comboBoxCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Informatica", "Administracion de Empresas", "Matematicas", "Educacion" }));
         comboBoxCurso.setBorder(null);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -972,6 +971,7 @@ public final class View extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_cancerlarProfesorMouseClicked
 
     private void editarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarProfesorActionPerformed
+        this.comboBoxCurso.setModel(this.model.getComboBoxCursos());
         this.FormProfesor.setVisible(true);
         this.guardarProfesor.setVisible(false);
         this.guardarCambiosProfesor.setVisible(true);
@@ -981,7 +981,7 @@ public final class View extends javax.swing.JFrame implements Observer {
         this.textNombre.setText(model.getNombre());
         this.textEmail.setText(model.getEmail());
         this.textTelefono.setText(model.getTelefono());
-        this.comboBoxCurso.setSelectedIndex(model.getCurso());
+        this.comboBoxCurso.setSelectedIndex(this.model.getCursoPosition(model.getCurso()));
         this.textCedula.setEditable(false);
     }//GEN-LAST:event_editarProfesorActionPerformed
 
@@ -1013,6 +1013,7 @@ public final class View extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_editarCursoActionPerformed
 
     private void agregarProfesorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarProfesorMouseClicked
+        this.comboBoxCurso.setModel(this.model.getComboBoxCursos());
         this.FormProfesor.setVisible(true);
         this.guardarProfesor.setVisible(true);
         this.textCedula.setEditable(true);
@@ -1087,7 +1088,7 @@ public final class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JPopupMenu profesorTablePopMenu;
     private javax.swing.JLabel profesoresTab;
     private javax.swing.JTable tableCursor;
-    private javax.swing.JTable tableProfesores;
+    private javax.swing.JTable tableProfesor;
     private javax.swing.JTextField textCedula;
     private javax.swing.JTextField textCodigo;
     private javax.swing.JTextField textCreditos;
@@ -1132,7 +1133,7 @@ public final class View extends javax.swing.JFrame implements Observer {
     }
 
     public int getSelectedIndexComboBoxCurso() {
-        return this.comboBoxCurso.getSelectedIndex() + 1;
+        return this.comboBoxCurso.getSelectedIndex();
     }
 
     public int getSelectedIndexComboBoxCarrera() {
@@ -1155,7 +1156,7 @@ public final class View extends javax.swing.JFrame implements Observer {
     }
 
     public int getSelectedRowTableProfesores() {
-        return this.tableProfesores.getSelectedRow();
+        return this.tableProfesor.getSelectedRow();
     }
 
     public int getSelectedRowTableCurso() {
@@ -1169,5 +1170,4 @@ public final class View extends javax.swing.JFrame implements Observer {
         this.textHorasSemanales.setText("");
         this.comboBoxCarrera.setSelectedIndex(0);
     }
-
 }

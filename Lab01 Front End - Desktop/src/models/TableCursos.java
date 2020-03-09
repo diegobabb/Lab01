@@ -24,6 +24,10 @@ public class TableCursos extends AbstractTableModel {
         this.data = new ArrayList<>();
     }
 
+    public ArrayList<Curso> getData() {
+        return data;
+    }
+
     @Override
     public int getRowCount() {
         return this.data.size();
@@ -97,6 +101,17 @@ public class TableCursos extends AbstractTableModel {
 
     void remove(int selectedRowTableCurso) {
         this.data.remove(selectedRowTableCurso);
+    }
+
+    int findRow(String curso) {
+        int index = 0;
+        for(Curso value : this.data){
+            if (value.codigo == curso) {
+                return index;
+            }
+            index++;
+        }
+        return 0;
     }
 
 }

@@ -13,9 +13,9 @@ public class Profesor {
     private String nombre;
     private String telefono;
     private String email;
-    private int curso;
+    private String curso;
 
-    public Profesor(int id, String cedula, String nombre, String telefono, String email, int curso) {
+    public Profesor(int id, String cedula, String nombre, String telefono, String email, String curso) {
         this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -24,7 +24,7 @@ public class Profesor {
         this.curso = curso;
     }
 
-    public Profesor(String cedula, String nombre, String telefono, String email, int curso) {
+    public Profesor(String cedula, String nombre, String telefono, String email, String curso) {
         this.id = -1;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -39,11 +39,15 @@ public class Profesor {
         this.nombre = "";
         this.telefono = "";
         this.email = "";
-        this.curso = -1;
+        this.curso = "";
     }
 
-    public int getCurso() {
+    public String getCurso() {
         return curso;
+    }
+
+    public void setCurso(String curso){
+        this.curso = curso;
     }
 
     public int getId() {

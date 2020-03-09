@@ -5,8 +5,6 @@
  */
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,7 +19,6 @@ public class Curso {
     int credito;
     int horas;
     int carrera;
-    List<Grupo> grupos;
 
     public Curso(int id, String codigo, String nombre, int credito, int horas, int carrera) {
         this.id = id;
@@ -30,7 +27,6 @@ public class Curso {
         this.credito = credito;
         this.horas = horas;
         this.carrera = carrera;
-        this.grupos = new ArrayList<>();
     }
 
     public Curso(String codigo, String nombre, int credito, int horas, int carrera) {
@@ -39,7 +35,6 @@ public class Curso {
         this.credito = credito;
         this.horas = horas;
         this.carrera = carrera;
-        this.grupos = new ArrayList<>();
     }
 
     public Curso() {
@@ -47,12 +42,7 @@ public class Curso {
         this.nombre = new String();
         this.credito = -1;
         this.horas = -1;
-        this.grupos = new ArrayList<>();
         this.carrera = -1;
-    }
-
-    public String getCodigo() {
-        return codigo;
     }
 
     @Override
@@ -78,6 +68,10 @@ public class Curso {
             return false;
         }
         return true;
+    }
+
+    public String getCodigo() {
+        return codigo;
     }
 
     public void setCodigo(String codigo) {
@@ -112,25 +106,17 @@ public class Curso {
         return carrera;
     }
 
-    public List<Grupo> getGrupos() {
-        return grupos;
+    public void setCarrera(int carrera) {
+        this.carrera = carrera;
     }
 
     public void setHoras(int horas) {
         this.horas = horas;
     }
 
-    public void agregarGrupo(Grupo grupo) {
-        this.grupos.add(grupo);
-    }
-
-    public void eliminarGrupo(Grupo grupo) {
-        this.grupos.remove(grupo);
-    }
-
     @Override
     public String toString() {
-        return "Curso{" + "id=" + id + ", codigo=" + codigo + ", nombre=" + nombre + ", credito=" + credito + ", horas=" + horas + ", carrera=" + carrera + ", grupos=" + grupos + '}';
+        return "Curso{" + "id=" + id + ", codigo=" + codigo + ", nombre=" + nombre + ", credito=" + credito + ", horas=" + horas + ", carrera=" + carrera + '}';
     }
 
 }
