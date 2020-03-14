@@ -23,7 +23,17 @@ public class ServiceProfesor extends Service {
     private static final String SELECTALL = "{?=call LISTAR_PROFESOR()}";
     private static final String DELETE = "{call ELIMINAR_PROFESOR(?)}";
 
-    public ServiceProfesor() {
+     private static ServiceProfesor SP = null;
+
+    private ServiceProfesor() {
+    }
+
+    public static ServiceProfesor getInstance() {
+        if (SP == null) {
+            SP = new ServiceProfesor();
+            return SP;
+        }
+        return SP;
     }
 
     /**

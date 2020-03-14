@@ -30,7 +30,17 @@ public class ServiceCurso extends Service {
     private static final String SELECTALL = "{?=call LISTAR_CURSO()}";
     private static final String DELETE = "{call ELIMINAR_CURSO(?)}";
 
-    public ServiceCurso() {
+    private static ServiceCurso SC = null;
+
+    private ServiceCurso() {
+    }
+
+    public static ServiceCurso getInstance() {
+        if (SC == null) {
+            SC = new ServiceCurso();
+            return SC;
+        }
+        return SC;
     }
 
     public void insert(Curso curso) throws GlobalException, NoDataException {

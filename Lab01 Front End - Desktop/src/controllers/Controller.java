@@ -4,6 +4,7 @@ import exceptions.GlobalException;
 import exceptions.NoDataException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import models.Curso;
@@ -15,31 +16,26 @@ import views.*;
  *
  * @author Diego Babb
  */
-public class Controller implements ActionListener {
+public class Controller extends Observable implements ActionListener {
 
     private Model model;
     private View view;
-    private Login login;
 
-    public Controller() throws GlobalException, NoDataException {
+    public Controller(App a) throws GlobalException, NoDataException {
         this.model = new Model();
-        this.login = new Login(model);
-        this.login.setVisible(true);
-        this.login.addListeners(this);
-    }
-
-    private void initView() throws GlobalException, NoDataException {
         this.view = new View(model);
-        view.addListeners(this);
-        model.addObserver(view);
-        view.setVisible(true);
+        this.view.addListeners(this);
+        this.model.addObserver(view);
+        this.view.setVisible(true);
+        this.addObserver(a);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case "Ingresar":
-                this.login();
+            case "refresh":
+                this.refresh();
                 break;
             case "Guardar profesor":
                 this.guardarProfesor();
@@ -208,30 +204,28 @@ public class Controller implements ActionListener {
         }
     }
 
-    private void login() {
-        String usuario = this.login.getTextNombreUsuario().replaceAll("\\s", "");
-        String contrasena = this.login.getTextContrasena().replaceAll("\\s", "");
-        if (!usuario.isEmpty() && !contrasena.isEmpty()) {
-            try {
-                this.model.login(usuario, contrasena);
-                this.login.setVisible(false);
-                this.initView();
-                this.login = null;
-            } catch (NoDataException | GlobalException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Casillas vacias", "Error", JOptionPane.ERROR_MESSAGE);
+    private void logout() {
+        this.model.logout();
+        this.view.setVisible(false);
+        this.update();
+    }
 
+    private void refresh() {
+        try {
+            this.model.refreshTables();
+            JOptionPane.showMessageDialog(null, "Tablas actualizadas", "information", JOptionPane.OK_OPTION);
+        } catch (GlobalException | NoDataException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar las tablas", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void logout() {
-        this.model.logout();
-        this.login = new Login(model);
-        this.login.addListeners(this);
-        this.view.setVisible(false);
-        this.view = null;
-        this.login.setVisible(true);
+    public void update() {
+        this.setChanged();
+        this.notifyObservers(null);
+    }
+
+    @Override
+    public void addObserver(java.util.Observer o) {
+        super.addObserver(o);
     }
 }

@@ -1,25 +1,28 @@
 package views;
 
-import controllers.Controller;
-import models.Model;
+import controllers.ControllerLogin;
+import java.util.Observable;
+import models.ModelLogin;
+import java.util.Observer;
 
 /**
  *
  * @author diego
  */
-public class Login extends javax.swing.JFrame  {
+public class Login extends javax.swing.JFrame implements Observer {
 
-    private Model model;
+    private ModelLogin model;
 
     /**
      * Creates new form View
      *
      * @param model
      */
-    public Login(Model model) {
+    public Login(ModelLogin model) {
         this.model = model;
         this.initComponents();
         setTitle("Lab01");
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -161,7 +164,7 @@ public class Login extends javax.swing.JFrame  {
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 
-    public void addListeners(Controller aThis) {
+    public void addListeners(ControllerLogin aThis) {
         this.loginButton.addActionListener(aThis);
     }
 
@@ -171,6 +174,11 @@ public class Login extends javax.swing.JFrame  {
 
     public String getTextNombreUsuario() {
         return textNombreUsuario.getText();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 
 }

@@ -46,6 +46,9 @@ public final class View extends javax.swing.JFrame implements Observer {
         this.setTitle("Lab01");
         this.TableProfesorFilter();
         this.TableCursoFilter();
+        this.tableCursor.getTableHeader().setReorderingAllowed(false); // not allow re-ordering of columns
+        this.tableProfesor.getTableHeader().setResizingAllowed(false);
+        this.setLocationRelativeTo(null);
     }
 
     private void newFilterCurso() {
@@ -169,6 +172,7 @@ public final class View extends javax.swing.JFrame implements Observer {
         this.guardarCambiosCurso.addActionListener(aThis);
         this.eliminarCurso.addActionListener(aThis);
         this.logoutButton.addActionListener(aThis);
+        this.refreshButton.addActionListener(aThis);
     }
 
     @Override
@@ -203,6 +207,7 @@ public final class View extends javax.swing.JFrame implements Observer {
         profesoresTab = new javax.swing.JLabel();
         SubTitulo = new javax.swing.JLabel();
         logoutButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
         contenedorTable = new javax.swing.JPanel();
         contenedorCursos = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -354,6 +359,12 @@ public final class View extends javax.swing.JFrame implements Observer {
         logoutButton.setActionCommand("logout");
         logoutButton.setBorder(null);
 
+        refreshButton.setBackground(new java.awt.Color(255, 255, 255));
+        refreshButton.setForeground(new java.awt.Color(255, 255, 255));
+        refreshButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/refresh.png"))); // NOI18N
+        refreshButton.setActionCommand("refresh");
+        refreshButton.setBorder(null);
+
         javax.swing.GroupLayout encabezadoLayout = new javax.swing.GroupLayout(encabezado);
         encabezado.setLayout(encabezadoLayout);
         encabezadoLayout.setHorizontalGroup(
@@ -362,17 +373,19 @@ public final class View extends javax.swing.JFrame implements Observer {
                 .addGap(28, 28, 28)
                 .addGroup(encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(encabezadoLayout.createSequentialGroup()
-                        .addComponent(cursosTab, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(profesoresTab, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(encabezadoLayout.createSequentialGroup()
                         .addComponent(titulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SubTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(logoutButton)
-                        .addGap(19, 19, 19))))
+                        .addGap(19, 19, 19))
+                    .addGroup(encabezadoLayout.createSequentialGroup()
+                        .addComponent(cursosTab, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(profesoresTab, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(refreshButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         encabezadoLayout.setVerticalGroup(
             encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,9 +397,11 @@ public final class View extends javax.swing.JFrame implements Observer {
                         .addComponent(SubTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(logoutButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(profesoresTab, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cursosTab, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(refreshButton)
+                    .addGroup(encabezadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(profesoresTab, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cursosTab, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         contenedorTable.setBackground(new java.awt.Color(255, 255, 255));
@@ -1087,6 +1102,7 @@ public final class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton logoutButton;
     private javax.swing.JPopupMenu profesorTablePopMenu;
     private javax.swing.JLabel profesoresTab;
+    private javax.swing.JButton refreshButton;
     private javax.swing.JTable tableCursor;
     private javax.swing.JTable tableProfesor;
     private javax.swing.JTextField textCedula;

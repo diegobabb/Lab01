@@ -20,6 +20,19 @@ import static services.Service.connection;
  */
 public class ServiceUsuario extends Service {
 
+    private static ServiceUsuario SU = null;
+
+    private ServiceUsuario() {
+    }
+
+    public static ServiceUsuario getInstance() {
+        if (SU == null) {
+            SU = new ServiceUsuario();
+            return SU;
+        }
+        return SU;
+    }
+
     private static final String FIND = "{?=call BUSCAR_USUARIO(?,?)}";
 
     public Usuario find(String usuario, String contrasena) throws GlobalException, NoDataException {

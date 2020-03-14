@@ -11,7 +11,6 @@ import java.util.Observable;
 import javax.swing.DefaultComboBoxModel;
 import services.ServiceCurso;
 import services.ServiceProfesor;
-import services.ServiceUsuario;
 
 /**
  *
@@ -23,10 +22,8 @@ public class Model extends Observable {
     TableCursos tableCursos;
 
     public Model() throws GlobalException, NoDataException {
-        ServiceProfesor SP = new ServiceProfesor();
-        ServiceCurso SC = new ServiceCurso();
-        this.tableProfesores = new TableProfesor(SP.selectAll());
-        this.tableCursos = new TableCursos(SC.selectAll());
+        this.tableProfesores = new TableProfesor(ServiceProfesor.getInstance().selectAll());
+        this.tableCursos = new TableCursos(ServiceCurso.getInstance().selectAll());
     }
 
     public void update() {
@@ -41,29 +38,25 @@ public class Model extends Observable {
     }
 
     public void agregarProfesor(Profesor p) throws GlobalException, NoDataException {
-        ServiceProfesor SP = new ServiceProfesor();
-        SP.insert(p);
+        ServiceProfesor.getInstance().insert(p);
         this.tableProfesores.add(p);
         this.update();
     }
 
     public void eliminarProfesor(int selectedRowTableProfesores) throws GlobalException, NoDataException {
-        ServiceProfesor SP = new ServiceProfesor();
-        SP.delete(this.tableProfesores.getCedula(selectedRowTableProfesores));
+        ServiceProfesor.getInstance().delete(this.tableProfesores.getCedula(selectedRowTableProfesores));
         this.tableProfesores.remove(selectedRowTableProfesores);
         this.update();
     }
 
     public void actualizarProfesor(Profesor p) throws GlobalException, NoDataException {
-        ServiceProfesor SP = new ServiceProfesor();
-        SP.update(p);
+        ServiceProfesor.getInstance().update(p);
         this.tableProfesores.update(p);
         this.update();
     }
 
     public void agregarCurso(Curso curso) throws GlobalException, NoDataException {
-        ServiceCurso SP = new ServiceCurso();
-        SP.insert(curso);
+        ServiceCurso.getInstance().insert(curso);
         this.tableCursos.add(curso);
         this.update();
     }
@@ -77,22 +70,15 @@ public class Model extends Observable {
     }
 
     public void actualizarCurso(Curso curso) throws GlobalException, NoDataException {
-        ServiceCurso SC = new ServiceCurso();
-        SC.update(curso);
+        ServiceCurso.getInstance().update(curso);
         this.tableCursos.update(curso);
         this.update();
     }
 
     public void eliminarCurso(int selectedRowTableCurso) throws GlobalException, NoDataException {
-        ServiceCurso SC = new ServiceCurso();
-        SC.delete(this.tableProfesores.getCedula(selectedRowTableCurso));
+        ServiceCurso.getInstance().delete(this.tableProfesores.getCedula(selectedRowTableCurso));
         this.tableCursos.remove(selectedRowTableCurso);
         this.update();
-    }
-
-    public void login(String usuario, String contrasena) throws GlobalException, NoDataException {
-        ServiceUsuario SU = new ServiceUsuario();
-        SU.find(usuario, contrasena);
     }
 
     public void logout() {
@@ -117,5 +103,11 @@ public class Model extends Observable {
             array[i] = this.tableCursos.getCurso(i).getNombre();
         }
         return new DefaultComboBoxModel<String>(array);
+    }
+
+    public void refreshTables() throws GlobalException, NoDataException {
+        this.tableProfesores = new TableProfesor(ServiceProfesor.getInstance().selectAll());
+        this.tableCursos = new TableCursos(ServiceCurso.getInstance().selectAll());
+        this.update();
     }
 }

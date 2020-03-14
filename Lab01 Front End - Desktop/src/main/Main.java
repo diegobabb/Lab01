@@ -5,7 +5,7 @@
  */
 package main;
 
-import controllers.Controller;
+import controllers.App;
 import exceptions.GlobalException;
 import exceptions.NoDataException;
 import java.util.logging.Level;
@@ -19,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            Controller c = new Controller();
+            App app = new App();
         } catch (GlobalException | NoDataException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

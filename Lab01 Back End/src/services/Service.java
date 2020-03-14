@@ -14,9 +14,10 @@ import java.sql.SQLException;
  * @author Diego Babb
  */
 public class Service {
-     protected static Connection connection;
 
-    public Service() {
+    protected static Connection connection;
+
+    protected Service() {
         connection = null;
     }
 
